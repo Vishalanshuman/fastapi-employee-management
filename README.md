@@ -86,6 +86,16 @@ This project is a RESTful API built with FastAPI for managing employee records a
 
 ## API Endpoints
 
+### Authentication Endpoints
+
+- **Register User**: `POST /auth/register/`
+  - Request Body: `UserCreate`
+  - Response: `UserCreate`
+
+- **Login**: `POST /auth/login/`
+  - Request Body: `LoginForm`
+  - Response: `Token`
+
 ### Employee Endpoints
 
 - **Create Employee**: `POST /api/employees/`
@@ -106,13 +116,5 @@ This project is a RESTful API built with FastAPI for managing employee records a
 - **Delete Employee**: `DELETE /api/employees/{employee_id}`
   - Response: `{"message": "Employee deleted successfully"}`
 
-### Authentication Endpoints
 
-- **Register User**: `POST /auth/register/`
-  - Request Body: `UserCreate`
-  - Response: `UserCreate`
-
-- **Login**: `POST /auth/login/`
-  - Request Body: `LoginForm`
-  - Response: `Token`
 
