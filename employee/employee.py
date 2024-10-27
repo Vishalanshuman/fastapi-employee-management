@@ -1,7 +1,7 @@
-from fastapi import APIRouter, Depends, HTTPException,Query
+from fastapi import APIRouter, Depends, HTTPException,Query,status
 from typing import Optional
 from sqlalchemy.orm import Session
-from config import get_db
+from config.database import get_db
 from config.schema import EmployeeOutput, EmployeeUpdate, PaginatedEmployees, EmployeeCreate
 from config.models import Employee, User
 from auth import get_current_user
@@ -12,7 +12,7 @@ router = APIRouter(
     
 )
 
-@router.post("/employees/", response_model=EmployeeOutput)
+@router.post("/employees/", response_model=EmployeeOutput,status_code=status.HTTP_201_CREATED)
 def create_employee(employee: EmployeeCreate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     try:
         db_employee = Employee(
@@ -58,7 +58,7 @@ def get_all_employees(
             "employees": employees
         }
     except Exception as e:
-        return HTTPException(status_code=500,detail=str(e))
+        return HTTPException(status_code=404,detail=str(e))
 
 
 @router.get("/employees/{employee_id}")
@@ -66,7 +66,7 @@ def get_employee(employee_id: int, db: Session = Depends(get_db), current_user: 
     try:
         employee = db.query(Employee).filter(Employee.id==employee_id).first()
         if not employee:
-            raise HTTPException(status_code=404, detail="Employee Not Found or You don't have access to this employee")
+            raise HTTPException(status_code=404, detail="Employee Not Found")
         return employee
     except Exception as e:
         return HTTPException(status_code=404,detail=str(e))

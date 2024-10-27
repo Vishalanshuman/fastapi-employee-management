@@ -15,6 +15,10 @@ This project is a RESTful API built with FastAPI for managing employee records a
   - User registration and login with secure password handling.
   - JWT (JSON Web Token) authentication for protected routes.
 
+- **Automated Testing**:
+  - Comprehensive test coverage for key functionalities.
+  - Unit tests using `pytest` for `employee` and `user` endpoints.
+
 ## Technologies Used
 
 - FastAPI
@@ -22,6 +26,7 @@ This project is a RESTful API built with FastAPI for managing employee records a
 - Pydantic (for data validation)
 - PostgreSQL (or other databases)
 - JWT for authentication
+- Pytest (for testing)
 
 ## Installation
 
@@ -116,5 +121,22 @@ This project is a RESTful API built with FastAPI for managing employee records a
 - **Delete Employee**: `DELETE /api/employees/{employee_id}`
   - Response: `{"message": "Employee deleted successfully"}`
 
+## Testing
 
+The project includes unit tests for key functionalities. Tests are written using `pytest`, with the following structure:
 
+- **tests/**: Contains all test files and configurations.
+  - **tests/test_employees.py**: Test cases for employee management, including parameterized tests.
+  - **tests/test_users.py**: Test cases for user registration and authentication.
+  - **tests/conftest.py**: Sets up fixtures and shared test resources, including database setup.
+
+### Running Tests
+
+1. **Ensure the virtual environment is activated**.
+2. **Run the tests**:
+
+   ```bash
+   pytest -v -s
+   ```
+
+   The test suite will execute all test cases, using fixtures defined in `conftest.py` and parameterized tests within individual test modules.

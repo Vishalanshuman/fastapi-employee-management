@@ -1,7 +1,6 @@
 from typing import Optional, List
 from datetime import datetime
 from pydantic import BaseModel, Field, EmailStr
-from config.models import User
 from config.common import  DepartmentEnum, RoleEnum
 
 
@@ -14,7 +13,6 @@ class EmployeeOutput(BaseModel):
     date_joined: datetime
 
     class Config:
-        orm_mode = True  
         from_attributes = True 
 
 
@@ -52,3 +50,16 @@ class LoginForm(BaseModel):
 class UserCreate(BaseModel):
     email: EmailStr
     password: str = Field(..., min_length=6)
+
+class UserCreate(BaseModel):
+    email: EmailStr
+    password: str = Field(..., min_length=6)
+
+
+class UserOutput(BaseModel):
+    id: int
+    email: EmailStr
+    created_at: datetime  # Use `datetime` from the standard library
+
+    class Config:
+        from_attributes = True
