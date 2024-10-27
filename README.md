@@ -24,7 +24,7 @@ This project is a RESTful API built with FastAPI for managing employee records a
 - FastAPI
 - SQLAlchemy (for ORM)
 - Pydantic (for data validation)
-- PostgreSQL (or other databases)
+- SQLite (or other databases)
 - JWT for authentication
 - Pytest (for testing)
 
@@ -33,7 +33,7 @@ This project is a RESTful API built with FastAPI for managing employee records a
 ### Prerequisites
 
 - Python 3.7+
-- PostgreSQL (or any other database)
+- SQLite (or any other database)
 
 ### Steps
 
