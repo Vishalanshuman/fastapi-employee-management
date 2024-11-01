@@ -16,7 +16,6 @@ class EmployeeOutput(BaseModel):
         from_attributes = True 
 
 
-
 class EmployeeCreate(BaseModel):
     name: str = Field(..., min_length=3, max_length=50)
     email: EmailStr
