@@ -158,7 +158,7 @@ pytest tests/ --csv=reports/test_report.csv
 ```
 This will generate a `test_report.csv` file in the reports folder.
 
-Note: You can run both the HTML and CSV report generation commands together by appending both flags:
+`Note`: You can run both the HTML and CSV report generation commands together by appending both flags:
 
 ```bash
 pytest tests/ --html=reports/test_report.html --csv=reports/test_report.csv --self-contained-
