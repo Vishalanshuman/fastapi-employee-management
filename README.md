@@ -140,3 +140,25 @@ The project includes unit tests for key functionalities. Tests are written using
    ```
 
    The test suite will execute all test cases, using fixtures defined in `conftest.py` and parameterized tests within individual test modules.
+
+### Test Report Generation (HTML & CSV)
+
+1. **To generate an HTML test report: You can run the following command to get a self-contained HTML report of your tests:**
+
+```bash
+pytest tests/ --html=reports/test_report.html --self-contained-html
+```
+This will create a `test_report.html` file in the `reports` folder.
+
+2. **To generate a CSV test report: To save the test results in CSV format, use the following command:**
+
+```bash
+pytest tests/ --csv=reports/test_report.csv
+```
+This will generate a `test_report.csv` file in the reports folder.
+
+`Note`: You can run both the HTML and CSV report generation commands together by appending both flags:
+
+```bash
+pytest tests/ --html=reports/test_report.html --csv=reports/test_report.csv --self-contained-
+```
