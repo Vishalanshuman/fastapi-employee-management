@@ -143,6 +143,7 @@ The project includes unit tests for key functionalities. Tests are written using
    The test suite will execute all test cases, using fixtures defined in `conftest.py` and parameterized tests within individual test modules.
 
 ### Test Report Generation (HTML & CSV)
+
 1. **To generate an HTML test report: You can run the following command to get a self-contained HTML report of your tests:**
 
 ```bash
