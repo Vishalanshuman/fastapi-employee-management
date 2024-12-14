@@ -3,11 +3,6 @@ import csv
 from config import schema
 
 
-def write_to_csv(test_name, status_code, response_data):
-    with open('test_results.csv', mode='a', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow([test_name, status_code, response_data])
-
 
 def test_login(client, test_user):
     res = client.post(
@@ -18,9 +13,6 @@ def test_login(client, test_user):
     )
     print(res.json())
     login_creds = schema.Token(**res.json())
-    
-    # Write results to CSV
-    write_to_csv('test_login', res.status_code, res.json())
     
     assert res.status_code == 200
     assert login_creds.token_type == "bearer"
@@ -40,8 +32,5 @@ def test_invalid_credentials(client, email, password, status_code):
         }
     )
     print(res.json())
-    
-    # Write results to CSV
-    write_to_csv('test_invalid_credentials', res.status_code, res.json())
     
     assert res.status_code == status_code

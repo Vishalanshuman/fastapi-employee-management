@@ -6,6 +6,7 @@ from auth import create_access_token
 from tests.database import TestingSessionLocal,engine
 import pytest
 import csv
+from datetime import datetime
 
 
 
@@ -50,7 +51,6 @@ def token(test_user):
 
 @pytest.fixture()
 def authorized_client(client, token):
-    # Update headers safely without overwriting
     client.headers.update({
         "Authorization": f"Bearer {token}"
     })
@@ -139,45 +139,33 @@ def test_employees(session):
 
 
 
-import pytest
-import csv
-from datetime import datetime
 
 
-# Hook for pytest to generate HTML report
-def pytest_html_report_title(report):
-    report.title = "Test Results Summary"
+# def pytest_html_report_title(report):
+#     report.title = "Test Results Summary"
 
 
-# Hook for pytest to create a custom CSV log file
-def pytest_runtest_logreport(report):
-    # This hook is called for each test, it runs after every test is completed
-    if report.when == 'call':  # Only log the actual test execution (not setup/teardown)
-        write_to_csv(report.nodeid, report.outcome, report.capstdout)
+# def pytest_runtest_logreport(report):
+#         write_to_csv(report.nodeid, report.outcome, report.capstdout)
 
 
-# Utility function for CSV Logging
-def write_to_csv(test_name, outcome, output):
-    fieldnames = ['Test Name', 'Status', 'Output', 'Timestamp']
-    # Open the CSV file in append mode, create if it doesn't exist
-    with open('test_results.csv', mode='a', newline='') as file:
-        writer = csv.DictWriter(file, fieldnames=fieldnames)
-        # Write the header if the file is empty
-        if file.tell() == 0:
-            writer.writeheader()
-        writer.writerow({
-            'Test Name': test_name,
-            'Status': outcome,
-            'Output': output.strip(),
-            'Timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        })
+# def write_to_csv(test_name, outcome, output):
+#     fieldnames = ['Test Name', 'Status', 'Output', 'Timestamp']
+#     with open('test_results.csv', mode='a', newline='') as file:
+#         writer = csv.DictWriter(file, fieldnames=fieldnames)
+#         if file.tell() == 0:
+#             writer.writeheader()
+#         writer.writerow({
+#             'Test Name': test_name,
+#             'Status': outcome,
+#             'Output': output.strip(),
+#             'Timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+#         })
 
 
-# You can also add a setup fixture for initialization of reports if needed
-@pytest.fixture(scope="session", autouse=True)
-def setup_reports():
-    # Create an initial file structure or any setup needed
-    with open('test_results.csv', mode='w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerow(['Test Name', 'Status', 'Output', 'Timestamp'])
+# @pytest.fixture(scope="session", autouse=True)
+# def setup_reports():
+#     with open('test_results.csv', mode='w', newline='') as file:
+#         writer = csv.writer(file)
+#         writer.writerow(['Test Name', 'Status', 'Output', 'Timestamp'])
 
